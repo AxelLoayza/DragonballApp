@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Nuevo Personaje{% endblock %}
+{% load static %}
+
+{% block content %}
+    <div class="card">
+    <h2>Editar Personaje</h2>
+    
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+    <br>
+
+    <a style="gap: 8px;"  href="{% url 'characters_list' %}" class="btn btn-success">Volver a la lista</a>
+    </div>
+    
+    
+    <div class="image-container">
+    
+        <img style="filter:blur(4px); filter: brightness(70%);"   src="{% static 'images/namek-goku.gif' %}" alt="Goku">
+
+    </div>
+    
+{% endblock %}

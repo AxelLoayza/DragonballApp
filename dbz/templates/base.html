@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DragonBall DB</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'dbz/style.css' %}?v={{ timestamp }}">
+
+</head>
+<body>
+    <h1 id="titulo">Dragonball App</h1>
+    <nav class="main-container">
+        <a href="/">Inicio</a>
+        <a href="{% url 'characters_list' %}">Personajes</a> 
+        <a href="{% url 'create_character' %}">Crea tu personaje!</a>
+        <a href="https://dragonball-api.com/api-docs#/">Documentacion</a>
+    </nav>
+    {% if request.path == '/' %}
+    <main>
+        <div class="card">
+            <h2>Prática calificada</h2>
+            <hr>
+            <h3>Alumno: Axel Loayza</h3>
+            <h3>Profesor: Eliot Garamendi</h3>
+            <hr>
+            <h3>Elaborado con:</h3>
+            <img styler="heigth:20px"  src="{% static 'images/django.png' %}">
+            <h3>Estilos: css</h3>
+            
+
+        </div>
+    </main>
+    <div class="video-container">
+        <video id="miVideo"  loop playsinline autoplay >
+            <source src="{% static 'videos/dbz.mp4' %}" type="video/mp4">
+           
+        </video>
+    </div>
+    {% endif %}
+
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+    <script>
+        window.onload = function() {
+            var video = document.getElementById("miVideo");
+            if (video) {
+                video.play().catch(error => console.log("Autoplay bloqueado:", error));
+            }
+        };
+
+        function toggleDescription(card) {
+            card.classList.toggle("expanded");
+        }
+        
+
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var video = document.getElementById("miVideo");
+            video.volume = 0.2; 
+        });
+    </script>
+    
+</body>
+
+<footer>
+    <h3 style="color: antiquewhite;font-family: 'Trebuchet MS'; margin-top: 20px;">Todos los derechos reservados a BajeMendi</h3>
+</footer>
+
+
+</html>

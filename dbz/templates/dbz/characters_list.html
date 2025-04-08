@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% load static %} 
+{% block content %}
+    <h2 id="titulo">Lista de Personajes</h2>
+    <div class="container">
+        
+    
+        <div class="importar-container">
+            <a href="{% url 'importar_manual' %}" class="btn importar-btn">Importar Personajes</a>
+        </div>
+
+        <form method="GET" action="{% url 'filtrar_personajes' %}" id="titulo" style="font-size: 20px;">
+            <label for="nombre">Buscar por Nombre:</label>
+            <input type="text" name="nombre" placeholder="Ejemplo: Gok">
+        
+            <label for="raza">Filtrar por Raza:</label>
+            <select name="raza">
+                <option value="">Todas</option>
+                <option value="Saiyan">Saiyan</option>
+                <option value="Namekian">Namekian</option>
+                <option value="Frieza Race">Frieza Race</option>
+                <option value="Human">Human</option>
+                <option value="Android">Android</option>
+            </select>
+        
+            <button type="submit">Filtrar</button>
+        </form>
+
+    </div>
+        
+        
+    
+ 
+    <div class="container">
+        {% for character in characters %}
+        <div class="card personaje" id="divss" onclick="mostrarDetalles('{{ character.id }}')">
+            <img src="{{ character.image }}" alt="{{ character.name }}">
+            
+            <div class="detalles" id="detalles-{{ character.id }}">
+                <h2 id="nombres">{{ character.name }}</h3>
+                <h3>Raza: {{ character.race }}</h3>
+                <h3>Género: {{ character.gender }}</h3>
+                <h3>Ki base: {{ character.ki }}</h3>
+                <h3>Ki max: {{ character.max_ki }}</h3>
+                <h3>Planeta de origen: {{ character.origin_planet }}</h3>
+            </div >
+            {% if character.id %}
+            <div class="actions" >
+                <a href="{% url 'update_character' character.id %}" class="btn">Editar</a>
+                <a href="{% url 'delete_character' character.id %}" class="btn">Eliminar</a>
+            </div>
+            {% endif %}
+            
+            {% if request.path == '/characters/characters/' %}
+            
+            
+                <div class="image-container2">
+                    <div class="planeta-imagen oculto" id="planeta-{{ character.id }}">
+                        <img src="{% static character.get_planet_image %}" alt="{{ character.origin_planet }}">
+                    </div>
+                </div>
+            {%endif%}
+            
+
+            
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <div class="image-container">
+        <img style=" filter:blur(4px); filter: brightness(50%);" src="{% static 'images/vege.gif' %}" alt="Goku">
+
+    </div>
+
+    <script>
+        function mostrarDetalles(id) {
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.remove("expandido");
+            });
+            document.querySelectorAll('.planeta-imagen').forEach(planeta => {
+                planeta.classList.remove("visible");
+            });
+
+            
+            let detalles = document.getElementById("detalles-" + id);
+            let card = detalles.closest(".card");
+            card.classList.add("expandido");
+
+            
+            let planetaImagen = document.getElementById("planeta-" + id);
+            if (planetaImagen) {
+                planetaImagen.classList.add("visible");
+            }
+        }
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,231 @@
+/* 🌅 Fondo general */
+body {
+    background-image: linear-gradient(135deg, #0f2a4e, #01101f);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    display: flex;
+    font-family: 'Trebuchet MS';
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  
+}
+
+
+#titulo{
+    color: antiquewhite;
+    font-family: 'Trebuchet MS'
+
+}
+
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 50px;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+nav a {
+    font-size: 25px;
+    text-decoration: none;
+    color: antiquewhite;
+    transition: all 0.3s ease-in-out;
+    padding: 10px 15px;
+}
+
+nav a:hover {
+    background-color: aliceblue;
+    color: black;
+    padding: 5px;
+    border-radius: 5px;
+    transform: scale(1.1);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+
+#main-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    
+    gap:30px;
+    justify-content: center;
+    
+}
+.row {
+    margin-bottom: 25px; 
+}
+
+
+.card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.76);
+    padding: 20px;
+    max-width: 300px;
+    width: auto;
+    text-align: center;
+    color: #ffffff;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+
+#divss {
+    margin-top: 10px;
+    margin: 40px;
+   
+}
+
+/* 🖼 Ajuste a imágenes dentro de tarjetas */
+.card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* 🔘 Botón moderno */
+.btn {
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+.btn:hover {
+    background-color: white;
+    color: black;
+    transform: scale(1.1);
+}
+
+img{
+    height: 400px;
+    
+}
+.video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    background-color: black; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+video{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+
+}
+
+.video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+.image-container {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; 
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+}
+
+
+#nombres{
+    
+    text-wrap: nowrap;
+    justify-content: fixed;
+    overflow: hidden;
+    animation:typing 2s steps(20) infinite alternate;
+}
+
+@keyframes typing {
+    from{
+        width:0ch;
+    }
+    to{
+        width: 100%;
+    }
+}
+
+#botones{
+    display: flex;
+    justify-content: fixed;
+    position: relative;
+    
+}
+
+
+.planeta-imagen {
+    display: none; /* Oculto inicialmente */
+    text-align: center;
+    margin-top: 10px;
+}
+
+.planeta-imagen.visible {
+    display: block; /* Se muestra cuando el personaje es activado */
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap; /* 🔹 Permite que los elementos salten de línea si no hay espacio */
+    gap: 20px; /* 🔹 Espaciado entre tarjetas */
+    justify-content: center; /* 🔹 Centra los elementos */
+    max-width: 1000px;
+}
+
+/* 🔹 Ajusta el ancho de las tarjetas para que haya 3 columnas */
+.card {
+    flex: 1 1 calc(33.33% - 20px); /* 🔹 Cada tarjeta ocupa aproximadamente 1/3 del ancho total */
+    max-width: 300px;
+}
+
+footer{
+    justify-content: absolute;
+    position: end;
+    color: antiquewhite;
+    font: 'Trebuchet MS';
+    font-size: 20px;
+
+}
+
+.image-container2{ width: 100%; height: 100%; object-fit: cover; } 
+.image-container2 img{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1; }
