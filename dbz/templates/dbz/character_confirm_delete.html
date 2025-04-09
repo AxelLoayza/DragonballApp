@@ -1,15 +1,20 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Eliminar Personaje{% endblock %}
 
 {% block content %}
-    <h2>Eliminar {{ character.name }}</h2>
+    <h2 id="titulo">Eliminar {{ character.name }}</h2>
     <div class="card">
     <p>¿Estás seguro de que quieres eliminar este personaje?</p>
         <form method="post">
             {% csrf_token %}
-            <button type="submit">Eliminar</button>
+            <button type="submit" class="btn btn-success">Eliminar</button>
         </form>
-        <a href="{% url 'characters_list' %}">Cancelar</a>
+        <br>
+        <a href="{% url 'characters_list' %}"  class="btn btn-success">Cancelar</a>
+    </div>
+    <div class="image-container">
+        <img style=" filter:blur(4px); filter: brightness(50%);" src="{% static 'images/fond.gif' %}" alt="Goku">
+
     </div>
 {% endblock %}

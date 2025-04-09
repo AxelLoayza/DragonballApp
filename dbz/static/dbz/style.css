@@ -1,4 +1,4 @@
-/* 🌅 Fondo general */
+
 body {
     background-image: linear-gradient(135deg, #0f2a4e, #01101f);
     background-repeat: no-repeat;
@@ -96,13 +96,13 @@ nav ul li {
    
 }
 
-/* 🖼 Ajuste a imágenes dentro de tarjetas */
+
 .card img {
     width: 100%;
     border-radius: 10px;
 }
 
-/* 🔘 Botón moderno */
+
 .btn {
     background: rgba(255, 255, 255, 0.3);
     border: none;
@@ -197,26 +197,26 @@ video{
 
 
 .planeta-imagen {
-    display: none; /* Oculto inicialmente */
+    display: none;
     text-align: center;
     margin-top: 10px;
 }
 
 .planeta-imagen.visible {
-    display: block; /* Se muestra cuando el personaje es activado */
+    display: block; 
 }
 
 .container {
     display: flex;
-    flex-wrap: wrap; /* 🔹 Permite que los elementos salten de línea si no hay espacio */
-    gap: 20px; /* 🔹 Espaciado entre tarjetas */
-    justify-content: center; /* 🔹 Centra los elementos */
+    flex-wrap: wrap; 
+    gap: 20px; 
+    justify-content: center;
     max-width: 1000px;
 }
 
-/* 🔹 Ajusta el ancho de las tarjetas para que haya 3 columnas */
+
 .card {
-    flex: 1 1 calc(33.33% - 20px); /* 🔹 Cada tarjeta ocupa aproximadamente 1/3 del ancho total */
+    flex: 1 1 calc(33.33% - 20px);
     max-width: 300px;
 }
 

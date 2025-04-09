@@ -5,7 +5,7 @@ from .forms import CharacterForm
 
 from django.http import JsonResponse
 
-API_URL = "https://dragonball-api.com/api/characters"
+API_URL = "https://dragonball-api.com/api/characters?limit=1000"
 
 from django.shortcuts import render
 from .models import Character
@@ -28,7 +28,6 @@ def import_api_characters():
             for char in characters_list:
                 print(f"Claves disponibles en personaje {char.get('name', 'Sin nombre')}: {char.keys()}")  
 
-            #
             for char in characters_list:
                 ki_text = char.get("ki", "No disponible")
                 max_ki_text = char.get("maxKi", "No disponible") 
@@ -52,7 +51,7 @@ def import_api_characters():
                     obj.save(update_fields=['ki', 'max_ki'])
                     obj.save()
 
-            print("✅ Importación completada con éxito.")
+            print(" Importación completada con éxito.")
 
         except Exception as e:
             print(f"Error al procesar los datos de la API: {e}")
@@ -91,7 +90,8 @@ def convert_large_ki(value):
 
 
 def characters_list(request):
-    characters = Character.objects.all()  #
+    characters = Character.objects.all()  
+
     return render(request, "dbz/characters_list.html", {"characters": characters})
 
 
