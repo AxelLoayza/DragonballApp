@@ -158,3 +158,5 @@ def filtrar_personajes(request):
 
     return render(request, 'dbz/characters_list.html', {'characters': characters})
 
+def audio_page(request):
+    return render(request, "dbz/audio.html")

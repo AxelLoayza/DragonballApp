@@ -12,7 +12,7 @@
     <h1 id="titulo">Dragonball App</h1>
     <nav class="main-container">
         <a href="/">Inicio</a>
-        <a href="{% url 'characters_list' %}">Personajes</a> 
+        <a id="startMusic" href="{% url 'characters_list' %}">Personajes</a> 
         <a href="{% url 'create_character' %}">Crea tu personaje!</a>
         <a href="https://dragonball-api.com/api-docs#/">Documentacion</a>
     </nav>
@@ -37,7 +37,17 @@
            
         </video>
     </div>
+    {%else%}
+
+
+    <div id="audioContainer">   <iframe src="{% url 'audio_page' %}" style="display: none;"></iframe> </div>
+
+ 
+
+        
+
     {% endif %}
+
 
     <main class="content">
         {% block content %}{% endblock %}
@@ -61,8 +71,12 @@
             var video = document.getElementById("miVideo");
             video.volume = 0.2; 
         });
+
     </script>
-    
+
+
+
+
 </body>
 
 <footer>
