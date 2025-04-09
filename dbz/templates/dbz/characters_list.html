@@ -32,9 +32,9 @@
         
     
  
-    <div class="container">
+    <div class="container" >
         {% for character in characters %}
-        <div class="card personaje" id="divss" onclick="mostrarDetalles('{{ character.id }}')">
+        <div class="card personaje" data-id="{{character.id}}"   id="divss" onclick="mostrarDetalles('{{ character.id }}')">
             <img src="{{ character.image }}" alt="{{ character.name }}">
             
             <div class="detalles" id="detalles-{{ character.id }}">
@@ -47,6 +47,7 @@
             </div >
             {% if character.id %}
             <div class="actions" >
+
                 <a href="{% url 'update_character' character.id %}" class="btn">Editar</a>
                 <a href="{% url 'delete_character' character.id %}" class="btn">Eliminar</a>
             </div>
@@ -71,6 +72,36 @@
     
         </div>
     </div>
+    <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+                document.querySelectorAll(".card.personaje").forEach(card => {
+                    let characterId = card.getAttribute("data-id");
+
+                    card.addEventListener("click", function (event) {
+                        event.stopPropagation(); 
+
+                        console.log("ID enviada:", characterId); 
+
+                        fetch("{% url 'add_favorite' %}", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRFToken": "{{ csrf_token }}"
+                            },
+                            body: JSON.stringify({ character_id: characterId })
+                        }).then(response => response.json())
+                        .then(data => {
+                            console.log("Respuesta del servidor:", data);
+                        }).catch(error => console.error("Error en la solicitud:", error));
+                    });
+                });
+            });
+
+        </script>
+        
+
 
 
 

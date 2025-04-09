@@ -10,14 +10,19 @@
 </head>
 <body>
     <h1 id="titulo">Dragonball App</h1>
+    
     <nav class="main-container">
         <a href="/">Inicio</a>
-        <a id="startMusic" href="{% url 'characters_list' %}">Personajes</a> 
+        <a href="{% url 'characters_list' %}">Personajes</a> 
         <a href="{% url 'create_character' %}">Crea tu personaje!</a>
+        <a id="toggleSound" >ModoCine🗣</button>
+        <a href="{% url 'favorites' %}" >Fav. ⭐</a>
         <a href="https://dragonball-api.com/api-docs#/">Documentacion</a>
+
     </nav>
     {% if request.path == '/' %}
-    <main>
+   
+    <main style="justify-items: center;">
         <div class="card">
             <h2>Prática calificada</h2>
             <hr>
@@ -25,14 +30,14 @@
             <h3>Profesor: Eliot Garamendi</h3>
             <hr>
             <h3>Elaborado con:</h3>
-            <img styler="heigth:20px"  src="{% static 'images/djan.png' %}">
+            <img style="height:350px"  src="{% static 'images/djan.png' %}">
             <h3>Estilos: css</h3>
             
 
         </div>
     </main>
     <div class="video-container">
-        <video id="miVideo"  loop playsinline autoplay >
+        <video id="miVideo"  loop playsinline autoplay muted>
             <source src="{% static 'videos/dbz.mp4' %}" type="video/mp4">
            
         </video>
@@ -40,11 +45,41 @@
     {%else%}
 
 
-    <div id="audioContainer">   <iframe src="{% url 'audio_page' %}" style="display: none;"></iframe> </div>
+    <div id="audioContainer">   
+        <iframe src="{% url 'audio_page' %}" style="display: none;">
 
- 
+        </iframe> 
+    </div>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let iframe = document.querySelector("#audioContainer iframe");
+            let button = document.getElementById("toggleSound");
+            let isMuted = localStorage.getItem("mediaMuted") === "true";
         
+            document.querySelectorAll("audio, video").forEach(media => {
+                media.muted = isMuted;
+            });
+        
+            button.innerText = isMuted ? "🔇 Off" : "🔊 On";
+        
+            button.addEventListener("click", function () {
+                isMuted = !isMuted;
+                localStorage.setItem("mediaMuted", isMuted);
+                button.innerText = isMuted ? "🔇 Off" : "🔊 On";
+        
+                document.querySelectorAll("audio, video").forEach(media => {
+                    media.muted = isMuted;
+                });
+        
+                
+                if (iframe) {
+                    iframe.contentWindow.postMessage("toggleSound", "*");
+                }
+            });
+        });
+        </script>
+     
 
     {% endif %}
 
@@ -75,7 +110,23 @@
     </script>
 
 
+    <script>
+    document.getElementById("toggleSound").addEventListener("click", function() {
+        let audios = document.querySelectorAll("audio");
+        let videos = document.querySelectorAll("video");
+        
+        audios.forEach(audio => {
+            audio.muted = !audio.muted;
+        });
+    
+        videos.forEach(video => {
+            video.muted = !video.muted;
+        });
+    });
+    </script>
 
+
+    
 
 </body>
 

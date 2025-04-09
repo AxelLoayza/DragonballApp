@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{%load static%}
+{% block content %}
+<h2 id="titulo"> Personajes Favoritos</h2>
+<div class="container">
+    {% for character in favorites %}
+    <div class="card personaje favorito" data-id="{{ character.id }}" onclick="removeFavorite('{{ character.id }}')">
+        <img src="{{ character.image }}" alt="{{ character.name }}">
+        <div class="detalles">
+            <h2>{{ character.name }}</h2>
+            <h3>Raza: {{ character.race }}</h3>
+            <h3>Género: {{ character.gender }}</h3>
+            <h3>Ki base: {{ character.ki }}</h3>
+            <h3>Ki max: {{ character.max_ki }}</h3>
+            <h3>Planeta de origen: {{ character.origin_planet }}</h3>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+<div class="image-container">
+    <img style=" filter:blur(4px); filter: brightness(50%);" src="{% static 'images/fond.gif' %}" alt="Goku">
+
+</div>
+
+
+<script>
+function mostrarDetalles(id) {
+    document.querySelectorAll('.card').forEach(card => {
+        card.classList.remove("expandido");
+    });
+    document.querySelectorAll('.planeta-imagen').forEach(planeta => {
+        planeta.classList.remove("visible");
+    });
+
+    let detalles = document.getElementById("detalles-" + id);
+    if (detalles) {
+        let card = detalles.closest(".card");
+        card.classList.add("expandido");
+    }
+}
+</script>
+
+<script>
+    function removeFavorite(id) {
+        fetch("{% url 'add_favorite' %}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": "{{ csrf_token }}"
+            },
+            body: JSON.stringify({ character_id: id })
+        }).then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  let card = document.querySelector(`.card.personaje.favorito[data-id='${id}']`);
+                  if (card) {
+                      card.remove();
+                  }
+              } else {
+                  console.error("Error al eliminar de favoritos:", data.error);
+              }
+          }).catch(error => console.error("Error en la solicitud:", error));
+    }
+    </script>
+    
+    
+
+</script>
+{% endblock %}

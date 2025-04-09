@@ -20,7 +20,12 @@ class Character(models.Model):
             "vegeta": "images/vgt.png",
             "namek": "images/namekk.png",
             "tierra": "images/tierr.png",
-            "limacity": "images/lima.png"
+            "limacity": "images/lima.png",
+            "tierra2":"images/tierr2.gif",
+            "bills": "images/bills.png",
+            "freezer":"images/frez.gif",
+            "space":"images/space2.gif",
+            "kaio":"images/kai.png",
         }
         return planet_images.get(self.origin_planet, "images/space.png")
     

@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect,get_object_or_404
-import requests
+import requests , json
 from .models import Character
 from .forms import CharacterForm 
-
+from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 
 API_URL = "https://dragonball-api.com/api/characters?limit=1000"
@@ -160,3 +160,29 @@ def filtrar_personajes(request):
 
 def audio_page(request):
     return render(request, "dbz/audio.html")
+
+def favorites_view(request):
+    favorite_ids = list(request.session.get("favorites", {}).keys())
+    favorites = Character.objects.filter(id__in=favorite_ids)
+    return render(request, "dbz/favorites.html", {"favorites": favorites})
+
+def add_favorite(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            character_id = str(data.get("character_id"))
+
+            if character_id:
+                favorites = request.session.get("favorites", {})
+                if character_id in favorites:
+                    del favorites[character_id]  
+                else:
+                    favorites[character_id] = True  
+
+                request.session["favorites"] = favorites
+                request.session.modified = True
+                return JsonResponse({"success": True})
+        except Exception as e:
+            return JsonResponse({"success": False, "error": str(e)})
+
+    return JsonResponse({"success": False})

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import characters_list,create_character,update_character,delete_character,importar_manual,filtrar_personajes,audio_page
+from .views import characters_list,create_character,update_character,delete_character,importar_manual,filtrar_personajes,audio_page,favorites_view, add_favorite
 
 urlpatterns = [
     path('characters/', characters_list, name='characters_list'),
@@ -9,4 +9,6 @@ urlpatterns = [
     path('characters/importar/', importar_manual, name='importar_manual'),
     path('filtrar/', filtrar_personajes, name='filtrar_personajes'),
     path("audio/", audio_page, name="audio_page"), 
+    path('favorites/',favorites_view,name='favorites'),
+        path('add_favorite/', add_favorite, name='add_favorite'),
 ]

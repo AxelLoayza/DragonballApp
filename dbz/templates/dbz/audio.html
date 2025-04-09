@@ -6,9 +6,33 @@
 </head>
 <body>
 
-        <audio id="bgMusic" autoplay loop>
+        <audio id="bgMusic" autoplay muted loop>
             <source src="{% static 'aud/dbz.mp3' %}" type="audio/mp3">
         </audio>
+
+
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let audio = document.getElementById("bgMusic");
+
+            if (audio) {
+                let isMuted = localStorage.getItem("audioMuted") === "true";
+                audio.muted = isMuted;
+            }
+        });
+
+        window.addEventListener("message", function(event) {
+            if (event.data === "toggleSound") {
+                let audio = document.getElementById("bgMusic");
+                if (audio) {
+                    audio.muted = !audio.muted;
+                    localStorage.setItem("audioMuted", audio.muted);
+                }
+            }
+        });
+        </script>
+
+            
 
         <script>
             document.addEventListener("DOMContentLoaded", function () {
