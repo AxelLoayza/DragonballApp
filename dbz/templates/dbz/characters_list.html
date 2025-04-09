@@ -52,7 +52,7 @@
             </div>
             {% endif %}
             
-            {% if request.path == '/characters/characters/' %}
+            
             
             
                 <div class="image-container2">
@@ -60,19 +60,20 @@
                         <img src="{% static character.get_planet_image %}" alt="{{ character.origin_planet }}">
                     </div>
                 </div>
-            {%endif%}
+            
             
 
             
         </div>
         {% endfor %}
+        <div class="image-container">
+            <img style=" filter:blur(4px); filter: brightness(50%);" src="{% static 'images/vege.gif' %}" alt="Goku">
+    
+        </div>
     </div>
 
 
-    <div class="image-container">
-        <img style=" filter:blur(4px); filter: brightness(50%);" src="{% static 'images/vege.gif' %}" alt="Goku">
 
-    </div>
 
     <script>
         function mostrarDetalles(id) {

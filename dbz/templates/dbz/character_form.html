@@ -5,9 +5,15 @@
 
 {% block content %}
     <div class="card">
-    <h2>Editar Personaje</h2>
-    
-    
+        <div>
+            {%if request.path == '/characters/characters/new/'  %}
+            <h2>Crear Personaje</h2>
+            {%else%}
+            <h2>Editar Personaje</h2>
+            {%endif%}
+        </div>
+        
+    <hr>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}

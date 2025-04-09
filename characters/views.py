@@ -17,10 +17,10 @@ def import_api_characters():
 
     if response.status_code == 200:
         try:
-            api_characters = response.json()  # 🔹 Solo llamamos una vez a .json()
-            characters_list = api_characters.get("items", [])  # 🔹 Extraemos los personajes correctamente
+            api_characters = response.json() 
+            characters_list = api_characters.get("items", [])  
 
-            # 🔥 Verificar la estructura del JSON
+            
             if not isinstance(characters_list, list):
                 print("Error: La API no devolvió una lista válida.")
                 return
@@ -28,11 +28,10 @@ def import_api_characters():
             for char in characters_list:
                 print(f"Claves disponibles en personaje {char.get('name', 'Sin nombre')}: {char.keys()}")  
 
-            # 🔹 Extraer y almacenar los datos correctamente
+            #
             for char in characters_list:
                 ki_text = char.get("ki", "No disponible")
-                max_ki_text = char.get("maxKi", "No disponible")  # 🔥 Cambiar 'max_ki' por 'maxKi'
-
+                max_ki_text = char.get("maxKi", "No disponible") 
                 obj, created = Character.objects.get_or_create(
                     name=char["name"],
                     defaults={  
@@ -47,7 +46,7 @@ def import_api_characters():
                     }
                 )
 
-                if not created:  # 🔄 Si ya existe, actualizar datos
+                if not created:  
                     obj.ki = ki_text
                     obj.max_ki = max_ki_text
                     obj.save(update_fields=['ki', 'max_ki'])

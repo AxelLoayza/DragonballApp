@@ -139,6 +139,8 @@ img{
 
 video{
     position: absolute;
+    filter: brightness(90%);
+    filter: blur(50%);
     top: 0;
     left: 0;
     width: 100%;
